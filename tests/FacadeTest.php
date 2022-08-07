@@ -43,11 +43,25 @@ test('updatesDocblockInPlace', function ($class, $facade, $doc) {
 	[BareFacade::class, 'BareFacade', '/**' . PHP_EOL . ' * sample docblock' . PHP_EOL . ' */'],
 ]);
 
+test('rendersFacadesInPlace', function ($class, $facade, $rootClass) {
+	$path = sprintf('facade_stubs/%s.php', $facade);
+
+	(new FacadeManager($class, $path))
+		->renderFacade($rootClass);
+
+	$contents = file_get_contents($path);
+
+	// a simple assertion ensuring we went from no file to file with generated docblock
+	expect($contents)->toContain('@see \Stubs\Class\ExampleClass');
+})->with([
+	[Facade::class, 'Facade', ExampleClass::class],
+]);
+
 test('createsNewFacades', function ($class, $facade, $rootClass, $accessor, $accessorType) {
 	$path = sprintf('facade_stubs/%s.php', $facade);
 
 	(new FacadeManager($class, $path))
-		->createNewFacade($rootClass, $accessor, $accessorType);
+		->renderFacade($rootClass, $accessor, $accessorType);
 
 	$expectedAccessorFormatString = $accessorType === FacadeTemplate::ACCESSOR_TYPE_FQCN
 		? '::class;'
@@ -69,7 +83,7 @@ test('rendersFacades', function ($class, $facade, $rootClass) {
 	$path = sprintf('facade_stubs/%s.php', $facade);
 
 	(new FacadeManager($class, $path))
-		->createNewFacade($rootClass);
+		->renderFacade($rootClass);
 
 	$contents = file_get_contents($path);
 

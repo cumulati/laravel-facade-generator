@@ -13,12 +13,17 @@ class FacadeManager
 	) {
 	}
 
-	public function renderFacade(string $class): void
-	{
+	public function renderFacade(
+		string $class,
+		?string $accessor = null,
+		?int $accessorType = FacadeTemplate::ACCESSOR_TYPE_FQCN
+	): void {
+		if (!file_exists($this->path)) {
+			$this->createNewFacade($class, $accessor, $accessorType);
+		}
+
 		$compiled = (new Generator($class))->generate();
-
 		$doc = $this->convertLinesToDocblock($compiled);
-
 		$this->writeDocblock($doc);
 	}
 
@@ -45,8 +50,6 @@ class FacadeManager
 		$contents = $this->renderNewFacade($class, $accessor, $accessorType);
 
 		file_put_contents($this->path, $contents);
-
-		$this->renderFacade($class);
 	}
 
 	protected function renderNewFacade(
