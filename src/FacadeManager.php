@@ -89,8 +89,16 @@ class FacadeManager
 		);
 	}
 
-	public function convertLinesToDocblock(array $lines): Doc
+	public function convertLinesToDocblock(array $lines, bool $includeHeader = true): Doc
 	{
+		if ($includeHeader) {
+			$lines = [
+				...FacadeTemplate::GENERATED_HEADER,
+				'',
+				...$lines,
+			];
+		}
+
 		$lines = array_map(fn ($l) => rtrim(sprintf(' * %s', $l)), $lines);
 		$lines = implode("\n", $lines);
 
