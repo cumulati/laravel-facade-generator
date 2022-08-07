@@ -18,9 +18,12 @@ class FacadeManager
 		?string $accessor = null,
 		?int $accessorType = FacadeTemplate::ACCESSOR_TYPE_FQCN
 	): void {
-		if (!file_exists($this->path)) {
-			$this->createNewFacade($class, $accessor, $accessorType);
+		if (file_exists($this->path)) {
+			// overwrite file if it exists
+			unlink($this->path);
 		}
+
+		$this->createNewFacade($class, $accessor, $accessorType);
 
 		$compiled = (new Generator($class))->generate();
 		$doc = $this->convertLinesToDocblock($compiled);
@@ -61,7 +64,6 @@ class FacadeManager
 		$nsParts = explode('\\', $this->facade);
 		$facade = array_pop($nsParts);
 		$ns = implode('\\', $nsParts);
-		$use = '';
 
 		if (!$accessor) {
 			if ($accessorType === FacadeTemplate::ACCESSOR_TYPE_ALIAS) {
@@ -73,8 +75,8 @@ class FacadeManager
 
 		if ($accessorType === FacadeTemplate::ACCESSOR_TYPE_FQCN) {
 			$accessorParts = explode('\\', $accessor);
-			$accessor = sprintf('%s::class', $accessorParts[count($accessorParts) - 1]);
-			$use = sprintf("\nuse %s;", implode('\\', $accessorParts));
+			$accessor = sprintf('\\%s::class', implode('\\', $accessorParts));
+		// $use = sprintf("\nuse %s;", implode('\\', $accessorParts));
 		} else {
 			$accessor = sprintf('\'%s\'', $accessor);
 		}
@@ -82,7 +84,6 @@ class FacadeManager
 		return sprintf(
 			$template,
 			$ns,
-			$use,
 			$facade,
 			$accessor,
 		);

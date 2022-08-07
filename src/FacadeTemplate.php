@@ -12,7 +12,7 @@ class FacadeTemplate
 
 namespace %s;
 
-use Illuminate\Support\Facades\Facade;%s
+use Illuminate\Support\Facades\Facade;
 
 class %s extends Facade
 {
