@@ -69,6 +69,26 @@ class ExampleClass extends BaseClass
 		return $ref;
 	}
 
+	public function func12($null = null): void
+	{
+		return;
+	}
+
+	public function func13(?bool $boolOrNull = null): bool
+	{
+		return !!$boolOrNull;
+	}
+
+	public function func14(bool|null $boolOrNull = null): bool
+	{
+		return !!$boolOrNull;
+	}
+
+	public function func15(bool $bool = true): bool
+	{
+		return $bool;
+	}
+
 	private function noCanSeeMe(): void
 	{
 	}

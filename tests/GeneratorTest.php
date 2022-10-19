@@ -18,6 +18,10 @@ $methods = [
 	['func9', '@method static void func9($withoutValues = [])'],
 	['func10', '@method static void func10(&$ref)'],
 	['func11', '@method static string func11(string &$ref = \'default\')'],
+	['func12', '@method static void func12($null = null)'],
+	['func13', '@method static bool func13(?bool $boolOrNull = null)'],
+	['func14', '@method static bool func14(?bool $boolOrNull = null)'],
+	['func15', '@method static bool func15(bool $bool = true)'],
 	['base0', '@method static int base0()'],
 ];
 

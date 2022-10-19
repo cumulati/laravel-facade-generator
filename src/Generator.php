@@ -174,6 +174,10 @@ class Generator
 			);
 		}
 
+		if ($node->getType() === 'Expr_ConstFetch') {
+			return $node->name->getFirst();
+		}
+
 		return '';
 	}
 }
