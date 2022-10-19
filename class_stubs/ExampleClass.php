@@ -89,6 +89,18 @@ class ExampleClass extends BaseClass
 		return $bool;
 	}
 
+	// intentionally with spaces between types
+	public function func16(int | string $intOrString): bool
+	{
+		return false;
+	}
+
+	// intentionally with spaces between types
+	public function func17(int | null | string $intOrStringOrNull): bool
+	{
+		return false;
+	}
+
 	private function noCanSeeMe(): void
 	{
 	}

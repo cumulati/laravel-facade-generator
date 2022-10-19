@@ -105,7 +105,7 @@ class Generator
 		$nullableType = false;
 		if (count($types) === 2) {
 			$nonNullTypes = array_filter($types, fn ($t) => $t->getName() !== 'null');
-			$nullableType = count($nonNullTypes) >= 1;
+			$nullableType = count($nonNullTypes) < count($types);
 
 			if ($nullableType) {
 				$types = $nonNullTypes;

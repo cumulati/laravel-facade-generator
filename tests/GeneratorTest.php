@@ -22,6 +22,8 @@ $methods = [
 	['func13', '@method static bool func13(?bool $boolOrNull = null)'],
 	['func14', '@method static bool func14(?bool $boolOrNull = null)'],
 	['func15', '@method static bool func15(bool $bool = true)'],
+	['func16', '@method static bool func16(int|string $intOrString)'],
+	['func17', '@method static bool func17(int|null|string $intOrStringOrNull)'],
 	['base0', '@method static int base0()'],
 ];
 
