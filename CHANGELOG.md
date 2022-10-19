@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-facade-generator` will be documented in this file.
 
+## 0.0.5 - 2022-10-19
+
+0.0.5
+
 ## 0.0.4 - 2022-08-07
 
 0.0.4
