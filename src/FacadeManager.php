@@ -120,7 +120,7 @@ class FacadeManager
 		if ($current) {
 			$contents = str_replace($current, $doc, $contents);
 		} else {
-			$startLine = $classInfo->getAst()->getAttribute('startLine');
+			$startLine = $classInfo->getStartLine();
 			$lineEnding = PHP_EOL;
 			$lines = explode($lineEnding, $contents);
 			$linesPrecedingClass = array_slice($lines, 0, $startLine - 1);

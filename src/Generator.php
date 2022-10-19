@@ -89,7 +89,7 @@ class Generator
 			$parts[] = ' = ';
 			$parts[] = $param->isDefaultValueConstant()
 				? '\\' . $param->getDefaultValueConstantName()
-				: $this->renderDefaultValue($param->getAst()->default);
+				: $this->renderDefaultValue($param->getDefaultValueExpression());
 		}
 
 		return implode('', $parts);
