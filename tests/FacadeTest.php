@@ -89,6 +89,7 @@ test('rendersFacades', function ($class, $facade, $rootClass) {
 
 	// a simple assertion ensuring we went from no file to file with generated docblock
 	expect($contents)->toContain('@see \Stubs\Class\ExampleClass');
+	expect($contents)->toEndWith("\n");
 })->with([
 	[ExampleClassFacade::class, 'ExampleClassFacade', ExampleClass::class],
 ]);

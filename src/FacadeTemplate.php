@@ -30,5 +30,6 @@ class %s extends Facade
 		return %s;
 	}
 }
+
 EOF;
 }
