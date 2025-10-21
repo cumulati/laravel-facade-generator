@@ -93,3 +93,18 @@ test('rendersFacades', function ($class, $facade, $rootClass) {
 })->with([
 	[ExampleClassFacade::class, 'ExampleClassFacade', ExampleClass::class],
 ]);
+
+test('rendersFacadesWithoutWritingMethods', function ($class, $facade, $rootClass) {
+	$path = sprintf('facade_stubs/%s.php', $facade);
+
+	(new FacadeManager($class, $path))
+		->renderFacade($rootClass, writeMethods: false);
+
+	$contents = file_get_contents($path);
+
+	expect($contents)->not->toContain('@method');
+	expect($contents)->toContain('@see \Stubs\Class\ExampleClass');
+	expect($contents)->toEndWith("\n");
+})->with([
+	[ExampleClassFacade::class, 'ExampleClassFacade', ExampleClass::class],
+]);

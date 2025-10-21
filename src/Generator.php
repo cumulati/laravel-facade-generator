@@ -20,21 +20,29 @@ class Generator
 	) {
 	}
 
-	public function generate(?string $methodName = null): array|string
+	public function generate(?string $methodName = null, ?bool $writeMethods = true): array|string
 	{
 		$methods = [];
-		$classInfo = (new BetterReflection())->reflector()->reflectClass($this->class);
 
-		foreach ($classInfo->getMethods(BaseReflectionMethod::IS_PUBLIC) as $method) {
-			if ($methodName && $methodName !== $method->getName()) {
-				continue;
+		if ($writeMethods) {
+			$classInfo = (new BetterReflection())->reflector()->reflectClass($this->class);
+
+			foreach ($classInfo->getMethods(BaseReflectionMethod::IS_PUBLIC) as $method) {
+				if ($methodName && $methodName !== $method->getName()) {
+					continue;
+				}
+
+				$methods[] = $this->compileMethod($method);
 			}
 
-			$methods[] = $this->compileMethod($method);
 		}
 
 		if (!$methodName) {
-			$methods[] = '';
+			// add blank line between methods and @see if we have methods
+			if(!empty($methods)) {
+				$methods[] = '';
+			}
+
 			$methods[] = '@see \\' . $this->class;
 			return $methods;
 		}

@@ -46,10 +46,10 @@ return $config
 		'unary_operator_spaces' => true,
 		'whitespace_after_comma_in_array' => true,
 
-		'binary_operator_spaces' => [
-			// 'align_double_arrow' => true,
-			// 'align_equals' => false,
-		],
+		//'binary_operator_spaces' => [
+		//	 'align_double_arrow' => true,
+		//	 'align_equals' => false,
+		//],
 	])
 	->setIndent("\t")
 	->setLineEnding("\n")

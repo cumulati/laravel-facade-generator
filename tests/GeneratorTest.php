@@ -26,6 +26,7 @@ $methods = [
 	['func17', '@method static bool func17(int|null|string $intOrStringOrNull)'],
 	['func18', '@method static list<string> func18()'],
 	['func19', '@method static array{\'class\':\Stubs\Class\OtherClass} func19()'],
+	['func20', '@method static array<string,OtherClass> func20()'],
 	['base0', '@method static int base0()'],
 ];
 
@@ -41,6 +42,16 @@ test('generatesAllMethods', function () use ($methods) {
 	$expectedLines = [
 		...array_column($methods, 1),
 		'',
+		'@see \Stubs\Class\ExampleClass',
+	];
+
+	expect($compiled)->toEqualCanonicalizing($expectedLines);
+});
+
+test('generateWithoutWritingMethods', function () use ($methods) {
+	$compiled = (new Generator(ExampleClass::class))->generate(writeMethods: false);
+
+	$expectedLines = [
 		'@see \Stubs\Class\ExampleClass',
 	];
 

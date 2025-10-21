@@ -117,6 +117,14 @@ class ExampleClass extends BaseClass
 		return ['class' => new OtherClass()];
 	}
 
+	/**
+	 * @return array<string,OtherClass>
+	 */
+	public function func20(): array
+	{
+		return ['class' => new OtherClass()];
+	}
+
 	private function noCanSeeMe(): void
 	{
 	}

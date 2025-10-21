@@ -16,7 +16,8 @@ class FacadeManager
 	public function renderFacade(
 		string $class,
 		?string $accessor = null,
-		?int $accessorType = FacadeTemplate::ACCESSOR_TYPE_FQCN
+		?int $accessorType = FacadeTemplate::ACCESSOR_TYPE_FQCN,
+		?bool $writeMethods = true
 	): void {
 		if (file_exists($this->path)) {
 			// overwrite file if it exists
@@ -25,7 +26,7 @@ class FacadeManager
 
 		$this->createNewFacade($class, $accessor, $accessorType);
 
-		$compiled = (new Generator($class))->generate();
+		$compiled = (new Generator($class))->generate(writeMethods: $writeMethods);
 		$doc = $this->convertLinesToDocblock($compiled);
 		$this->writeDocblock($doc);
 	}
