@@ -101,10 +101,10 @@ class FacadeManager
 		}
 
 		$lines = array_map(fn ($l) => rtrim(sprintf(' * %s', $l)), $lines);
-		$lines = implode("\n", $lines);
+		$lines = implode(PHP_EOL, $lines);
 
 		return new Doc(
-			sprintf("/**\n%s\n */", $lines)
+			sprintf('/**%s%s%s */', PHP_EOL, $lines, PHP_EOL)
 		);
 	}
 
