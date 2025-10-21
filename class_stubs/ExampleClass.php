@@ -101,6 +101,22 @@ class ExampleClass extends BaseClass
 		return false;
 	}
 
+	/**
+	 * @return list<string>
+	 */
+	public function func18(): array
+	{
+		return [];
+	}
+
+	/**
+	 * @return array{'class':\Stubs\Class\OtherClass}
+	 */
+	public function func19(): array
+	{
+		return ['class' => new OtherClass()];
+	}
+
 	private function noCanSeeMe(): void
 	{
 	}

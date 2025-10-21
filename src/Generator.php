@@ -54,7 +54,13 @@ class Generator
 		);
 
 		$returnType = null;
-		if ($method->hasReturnType()) {
+
+		$docComment = $method->getDocComment();
+		if ($docComment) {
+			$returnType = $this->extractReturnTypeFromDocComment($docComment);
+		}
+
+		if (!$returnType && $method->hasReturnType()) {
 			$returnType = $this->compileType($method->getReturnType());
 		}
 
@@ -64,6 +70,15 @@ class Generator
 			$method->getName(),
 			implode(', ', $params),
 		);
+	}
+
+	protected function extractReturnTypeFromDocComment(string $docComment): ?string
+	{
+		$matches = [];
+		preg_match('/@return\s+(?<type>.*)/', $docComment, $matches);
+
+		$type = $matches['type'] ?? null;
+		return is_string($type) ? $type : null;
 	}
 
 	protected function compileMethodParameter(ReflectionParameter $param): string
