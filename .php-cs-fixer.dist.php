@@ -39,7 +39,6 @@ return $config
 		'no_whitespace_before_comma_in_array' => true,
 		'no_whitespace_in_blank_line' => true,
 		'object_operator_without_whitespace' => true,
-		'single_blank_line_before_namespace' => true,
 		'space_after_semicolon' => true,
 		'ternary_operator_spaces' => true,
 		'trim_array_spaces' => true,
