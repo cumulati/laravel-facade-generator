@@ -77,7 +77,7 @@ class FacadeManager
 		if ($accessorType === FacadeTemplate::ACCESSOR_TYPE_FQCN) {
 			$accessorParts = explode('\\', $accessor);
 			$accessor = sprintf('\\%s::class', implode('\\', $accessorParts));
-		// $use = sprintf("\nuse %s;", implode('\\', $accessorParts));
+			// $use = sprintf("\nuse %s;", implode('\\', $accessorParts));
 		} else {
 			$accessor = sprintf('\'%s\'', $accessor);
 		}

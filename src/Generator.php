@@ -34,12 +34,11 @@ class Generator
 
 				$methods[] = $this->compileMethod($method);
 			}
-
 		}
 
 		if (!$methodName) {
 			// add blank line between methods and @see if we have methods
-			if(!empty($methods)) {
+			if (!empty($methods)) {
 				$methods[] = '';
 			}
 
